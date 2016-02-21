@@ -1,4 +1,4 @@
-package com.example.two_one_a_tv.util;
+package com.example.UI.util;
 
 import android.app.Activity;
 import android.os.Build;

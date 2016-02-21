@@ -1,27 +1,18 @@
-package com.example.two_one_a_tv;
+package com.example.UI;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Handler;
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
 //import android.support.v4.app.Fragment;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.view.Window;
 import android.widget.MediaController;
 import android.widget.VideoView;
 

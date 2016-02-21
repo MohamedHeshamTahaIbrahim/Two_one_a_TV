@@ -1,4 +1,4 @@
-package com.example.two_one_a_tv;
+package com.example.UI;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
