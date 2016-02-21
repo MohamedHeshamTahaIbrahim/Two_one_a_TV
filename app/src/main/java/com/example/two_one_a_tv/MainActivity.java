@@ -1,13 +1,17 @@
 package com.example.two_one_a_tv;
 
+import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+//import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,21 +21,27 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.view.Window;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
+import Controller.LifeStreamController;
 
-public class MainActivity extends ActionBarActivity   {
+
+public class MainActivity extends Activity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
+PlaceholderFragment n=new PlaceholderFragment();
+            getFragmentManager().beginTransaction()
+                   .add(R.id.container, new PlaceholderFragment()).commit();
+
+         //   getSupportFragmentManager().beginTransaction().add(R.id.container,new PlaceholderFragment()).commit();
         }
+
     }
 
 
@@ -60,7 +70,7 @@ public class MainActivity extends ActionBarActivity   {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment /*implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener, MediaController.MediaPlayerControl */{
+    public static class PlaceholderFragment extends Fragment  implements MediaPlayer.OnCompletionListener/*implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener, MediaController.MediaPlayerControl */{
       VideoView life_vv;
   /*private MediaPlayer mediaPlayer;
         private SurfaceHolder vidHolder;
@@ -69,7 +79,8 @@ public class MainActivity extends ActionBarActivity   {
         private Handler handler = new Handler();
         String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
     */
-  String vidAddress = "http://lb218.cdn.mangomolo.com/218/smil:218.smil/playlist.m3u8";
+  String url = "http://lb218.cdn.mangomolo.com/218/smil:218.smil/playlist.m3u8";
+   LifeStreamController lifeStreamController=new LifeStreamController();
         public PlaceholderFragment() {
         }
 
@@ -79,14 +90,17 @@ public class MainActivity extends ActionBarActivity   {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             life_vv=(VideoView)rootView.findViewById(R.id.life_stream);
            // String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
-            Uri vidUri = Uri.parse(vidAddress);
-
-           life_vv.setVideoURI(vidUri);
+            //Uri vidUri = Uri.parse(vidAddress);
+            life_vv.setMediaController(new MediaController(getActivity()));
+            life_vv.setOnCompletionListener(this);
+            life_vv.setVideoURI(Uri.parse(lifeStreamController.urlValue()));
+            life_vv.start();
+          /* life_vv.setVideoURI(vidUri);
             MediaController vidControl = new MediaController(getActivity());
             vidControl.setAnchorView(life_vv);
             life_vv.setMediaController(vidControl);
 
-            life_vv.start();
+            life_vv.start();*/
             /*
             vidSurface = (SurfaceView)rootView.findViewById(R.id.surfView);
             vidHolder = vidSurface.getHolder();
@@ -94,7 +108,18 @@ public class MainActivity extends ActionBarActivity   {
             return rootView;
         }
 
-      /*  @Override
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            getActivity().finish();
+        }
+
+        public static void showRemoteVideo(Context ctx, String url) {
+            Intent i = new Intent(ctx, MainActivity.class);
+
+            i.putExtra("url", url);
+            ctx.startActivity(i);
+        }
+        /*  @Override
         public void surfaceCreated(SurfaceHolder holder) {
             try {
                 mediaPlayer = new MediaPlayer();
