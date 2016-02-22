@@ -86,6 +86,7 @@ PlaceholderFragment n=new PlaceholderFragment();
             life_vv.setOnCompletionListener(this);
             life_vv.setVideoURI(Uri.parse(lifeStreamController.urlValue()));
             life_vv.start();
+
           /* life_vv.setVideoURI(vidUri);
             MediaController vidControl = new MediaController(getActivity());
             vidControl.setAnchorView(life_vv);
