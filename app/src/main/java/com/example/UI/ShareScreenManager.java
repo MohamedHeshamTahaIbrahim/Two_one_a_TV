@@ -9,7 +9,7 @@ import Controller.LifeStreamController;
 /**
  * Created by محمد on 22/02/2016.
  */
-public class ShareScreen {
+public class ShareScreenManager {
 
     public static void shareUrl(Activity firstScreen){
         LifeStreamController lifeStreamController=new LifeStreamController();

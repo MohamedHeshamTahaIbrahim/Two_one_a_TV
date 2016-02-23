@@ -12,5 +12,16 @@
     <string name="share">Share</string>
     <string name="title_activity_sharing">SharingActivity</string>
     <string name="title_activity_share">ShareActivity</string>
+    <string name="title_activity_programs">البرامج</string>
+    <string name="title_activity_outside_program">في الخارج</string>
+    <string name="title_activity_we_and_world">نحن والعالم</string>
+    <string name="title_activity_game">GAME</string>
+    <string name="title_activity_government">الحكومة</string>
+    <string name="title_activity_fan">فن</string>
+    <string name="title_activity_merage_programs">برامج متنوعة</string>
+    <string name="title_activity_morning">الصبح</string>
+    <string name="title_activity_news">الأخبار</string>
+    <string name="title_activity_countries">البلاد</string>
+    <string name="title_activity_eve">العشية</string>
 
 </resources>

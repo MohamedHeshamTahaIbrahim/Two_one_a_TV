@@ -1,5 +1,6 @@
 package com.example.UI;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,27 +9,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 
-public class ShareActivity extends ActionBarActivity {
+public class MorningProgram extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_share);
+        setContentView(R.layout.activity_morning_program);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_share, menu);
+        getMenuInflater().inflate(R.menu.menu_morning_program, menu);
         return true;
     }
 
@@ -40,19 +41,27 @@ public class ShareActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);*/
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this,Programs.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
-        ImageButton share_btn;
-        ShareScreenManager shareScreen=new ShareScreenManager();
+    public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
         }
@@ -60,15 +69,8 @@ public class ShareActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_share, container, false);
-            share_btn=(ImageButton)rootView.findViewById(R.id.share);
-            share_btn.setOnClickListener(this);
+            View rootView = inflater.inflate(R.layout.fragment_morning_program, container, false);
             return rootView;
-        }
-
-        @Override
-        public void onClick(View v) {
-           shareScreen.shareUrl(getActivity());
         }
     }
 }
